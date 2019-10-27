@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 1033210511}
   - component: {fileID: 1033210510}
   m_Layer: 0
-  m_Name: Spawn Manager
+  m_Name: Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,7 +654,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2a6a648871d1fc943a9b66f866f2d3e0, type: 2}
+  - {fileID: 2100000, guid: 61f7d1d56051c2f4c9a874501e6501fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
