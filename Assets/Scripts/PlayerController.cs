@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         playerRb.transform.Translate(HorizontalInput, 0, VerticalInput, Space.World);
 
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,7 +55,6 @@ public class PlayerController : MonoBehaviour
             Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
 
             enemyRigidbody.AddForce(awayFromPlayer * powerUpStrength, ForceMode.Impulse);
-            Debug.Log("Collided with: " + collision.gameObject.name + " with powerup set to " + hasPowerup);
         }
     }
 }
