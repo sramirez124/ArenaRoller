@@ -6,10 +6,10 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField] private float speed = 5.0f;
-    private Rigidbody enemyRb;
-    private GameObject player;
-    public int enemyCount;
 
+    private GameObject player;
+    private Rigidbody enemyRb;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +21,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Vector3 lookDirection = (player.transform.position - transform.position).normalized;
-
+        Vector3 runAway = new Vector3
         enemyRb.AddForce(lookDirection * speed);
 
-        if (transform.position.y < -10)
+        enemyRb.AddForce(transform.position - player.transform.position, 0, transform.position - player.transform.position);
+
+        if (transform.position.y < -5)
         {
             Destroy(gameObject);
         }

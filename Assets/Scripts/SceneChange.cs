@@ -12,7 +12,7 @@ public class SceneChange : MonoBehaviour
 
     public void StartOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
     }
     
     public void QuitGame()
