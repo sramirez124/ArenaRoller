@@ -6,10 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 1f;
     [SerializeField] private GameObject powerupIndicator;
-    [SerializeField] private bool hasPowerup;
+    [SerializeField] private bool PushPowerup;
 
     private Rigidbody playerRb;
     private float powerUpStrength = 15.0f;
+
+    private float VerticalInput;
+    private float HorizontalInput;
 
     // Start is called before the first frame update
     void Start()
@@ -20,19 +23,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         float VerticalInput = Input.GetAxis("Vertical");
         float HorizontalInput = Input.GetAxis("Horizontal");
-        playerRb.transform.Translate(HorizontalInput, 0, VerticalInput, Space.World);
+        Vector3 movement = new Vector3(HorizontalInput, 0, VerticalInput);
+        
+        //playerRb.transform.Translate(HorizontalInput, 0, VerticalInput, Space.World);
+        playerRb.AddForce(movement.normalized * speed, ForceMode.Impulse);
+
 
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Powerup"))
         {
-            hasPowerup = true;
+            PushPowerup = true;
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
             powerupIndicator.gameObject.SetActive(true);
@@ -43,13 +50,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(7);
-        hasPowerup = false;
+        PushPowerup = false;
         powerupIndicator.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
+        if (collision.gameObject.CompareTag("Enemy") && PushPowerup)
         {
             Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
