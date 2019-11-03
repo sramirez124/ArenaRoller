@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float speed = 2f;
     [SerializeField] private GameObject powerupIndicator;
     [SerializeField] private bool PushPowerup;
     [SerializeField] private float powerUpStrength = 15.0f;
@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
         float HorizontalInput = Input.GetAxis("Horizontal");
         Vector3 movement = new Vector3(HorizontalInput, 0, VerticalInput);
 
-        //playerRb.transform.Translate(HorizontalInput, 0, VerticalInput, Space.World);
         playerRb.AddForce(movement.normalized * speed, ForceMode.Impulse);
 
 
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             PushPowerup = true;
             Destroy(other.gameObject);
-            StartCoroutine(PowerupCountdownRoutine());
+            StartCoroutine(Powerup1CountdownRoutine());
             powerupIndicator.gameObject.SetActive(true);
         }
 
@@ -54,18 +53,23 @@ public class PlayerController : MonoBehaviour
         {
             speed = speed * speedPowerUp;
             Destroy(other.gameObject);
-            StartCoroutine(PowerupCountdownRoutine());
+            StartCoroutine(Powerup2CountdownRoutine());
             playerTrial.gameObject.SetActive(true);
         }
 
     }
 
-    IEnumerator PowerupCountdownRoutine()
+    IEnumerator Powerup1CountdownRoutine()
     {
         yield return new WaitForSeconds(7);
         PushPowerup = false;
-        speed = speed / speedPowerUp;
         powerupIndicator.gameObject.SetActive(false);
+    }
+
+    IEnumerator Powerup2CountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        speed = speed / speedPowerUp;
         playerTrial.gameObject.SetActive(false);
     }
 

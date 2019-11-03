@@ -20,7 +20,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemyPrefab;
     private float spawnRange = 9.0f;
     public float enemyCount;
-    public float waveCount = 3;
+    public int waveCount = 3;
+    private bool spawnEnemies = true;
 
     // Start is called before the first frame update
     void Start()
@@ -38,32 +39,31 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyCount = FindObjectsOfType<Enemy>().Length;
-        if (waveCount >= 0)
-        {
-            enemiesToSpawn++;
-            SpawnEnemyWave(enemiesToSpawn);
-            Instantiate(powerupPrefab0, GenerateSpawnPosition(), powerupPrefab0.transform.rotation);
-            waveCount--;
-            gameOverMenu.SetActive(false);
-            if (waveCount == 0)
-            {
-                nextLevelMenu.SetActive(true);
-                enemiesToSpawn = 0;
-            }
-        }
-
+        EnemySpawner();
         if (Player.transform.position.y < -10)
         {
             Destroy(gameObject);
             gameOverMenu.SetActive(true);
         }
-
-        if (waveCount == 0)
-        {
-            nextLevelMenu.SetActive(true);
-        }
         MenuUpdate();
+    }
+
+    private void EnemySpawner()
+    {
+        enemyCount = FindObjectsOfType<Enemy>().Length;
+        if (enemyCount == 0 && waveCount >= 0)
+        {
+            SpawnEnemyWave(enemiesToSpawn);
+            enemiesToSpawn++;
+            Instantiate(powerupPrefab0, GenerateSpawnPosition(), powerupPrefab0.transform.rotation);
+            waveCount--;
+        }
+        else if (waveCount == 0)
+        {
+            spawnEnemies = false;
+            nextLevelMenu.SetActive(true);
+            enemiesToSpawn = 0;
+        }
     }
 
     private void SpawnEnemyWave(int enemiesToSpawn)

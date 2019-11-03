@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Movement();
-        if (transform.position.y < -5)
+        if (transform.position.y < -2)
         {
             Destroy(gameObject);
         }
@@ -39,7 +39,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    //Code to make the ball back up and charge
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -49,6 +50,5 @@ public class Enemy : MonoBehaviour
             enemyRb.AddForce(BackUp * speed);
             Movement();
         }
-    }
-    
+    }*/
 }
