@@ -7,10 +7,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private GameObject powerupIndicator;
     [SerializeField] private bool PushPowerup;
+    [SerializeField] private float powerUpStrength = 15.0f;
+    [SerializeField] private float speedPowerUp = 2;
+    [SerializeField] private GameObject playerTrial;
 
     private Rigidbody playerRb;
-    private float powerUpStrength = 15.0f;
-
     private float VerticalInput;
     private float HorizontalInput;
 
@@ -23,26 +24,38 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PlayerMovement();
+    }
+
+    private void PlayerMovement()
+    {
         float VerticalInput = Input.GetAxis("Vertical");
         float HorizontalInput = Input.GetAxis("Horizontal");
         Vector3 movement = new Vector3(HorizontalInput, 0, VerticalInput);
-        
+
         //playerRb.transform.Translate(HorizontalInput, 0, VerticalInput, Space.World);
         playerRb.AddForce(movement.normalized * speed, ForceMode.Impulse);
 
 
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Powerup"))
+        if (other.CompareTag("Powerup1"))
         {
             PushPowerup = true;
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
             powerupIndicator.gameObject.SetActive(true);
+        }
+
+        if (other.CompareTag("Powerup2"))
+        {
+            speed = speed * speedPowerUp;
+            Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdownRoutine());
+            playerTrial.gameObject.SetActive(true);
         }
 
     }
@@ -51,7 +64,9 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(7);
         PushPowerup = false;
+        speed = speed / speedPowerUp;
         powerupIndicator.gameObject.SetActive(false);
+        playerTrial.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -63,5 +78,6 @@ public class PlayerController : MonoBehaviour
 
             enemyRigidbody.AddForce(awayFromPlayer * powerUpStrength, ForceMode.Impulse);
         }
+
     }
 }
