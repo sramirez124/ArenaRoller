@@ -6,18 +6,21 @@ using UnityEngine.UI;
 public class SpawnManager : MonoBehaviour
 {
     // in-game variables
-    [SerializeField] private int enemiesToSpawn = 3;
-    [SerializeField] private GameObject powerupPrefab0;
     [SerializeField] private GameObject powerupPrefab1;
     [SerializeField] private GameObject powerupPrefab2;
+    [SerializeField] private GameObject powerupPrefab3;
     [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject enemyPrefabSmall;
+    [SerializeField] private GameObject enemyPrefabMedium;
+    [SerializeField] private int smallEnenmyCount;
+    [SerializeField] private int mediumEnenmyCount;
 
     // menu variables
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject nextLevelMenu;
     public Text gameText;
 
-    public GameObject enemyPrefab;
+    
     private float spawnRange = 9.0f;
     public float enemyCount;
     public int waveCount = 3;
@@ -26,10 +29,10 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemyWave(enemiesToSpawn);
-        Instantiate(powerupPrefab0, GenerateSpawnPosition(), powerupPrefab0.transform.rotation);
-        //Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
-        //Instantiate(powerupPrefab2, GenerateSpawnPosition(), powerupPrefab2.transform.rotation);
+        SpawnEnemyWave(smallEnenmyCount, 0);
+        Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
+        Instantiate(powerupPrefab2, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
+        //Instantiate(powerupPrefab3, GenerateSpawnPosition(), powerupPrefab2.transform.rotation);
         MenuUpdate();
 
         gameOverMenu.SetActive(false);
@@ -40,9 +43,8 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         EnemySpawner();
-        if (Player.transform.position.y < -10)
+        if (Player.transform.position.y < - 4)
         {
-            Destroy(gameObject);
             gameOverMenu.SetActive(true);
         }
         MenuUpdate();
@@ -51,26 +53,31 @@ public class SpawnManager : MonoBehaviour
     private void EnemySpawner()
     {
         enemyCount = FindObjectsOfType<Enemy>().Length;
-        if (enemyCount == 0 && waveCount >= 0)
+        if (enemyCount == 0)
         {
-            SpawnEnemyWave(enemiesToSpawn);
-            enemiesToSpawn++;
-            Instantiate(powerupPrefab0, GenerateSpawnPosition(), powerupPrefab0.transform.rotation);
+            SpawnEnemyWave(smallEnenmyCount, mediumEnenmyCount);
+            smallEnenmyCount++;
+            mediumEnenmyCount++;
+            Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
+            Instantiate(powerupPrefab2, GenerateSpawnPosition(), powerupPrefab2.transform.rotation);
             waveCount--;
         }
         else if (waveCount == 0)
         {
-            spawnEnemies = false;
             nextLevelMenu.SetActive(true);
-            enemiesToSpawn = 0;
         }
     }
 
-    private void SpawnEnemyWave(int enemiesToSpawn)
+    private void SpawnEnemyWave(int smallEnemies, int mediumEnemies)
     {
-        for (int i = 0; i < enemiesToSpawn; i++)
+        for (int i = 0; i < smallEnemies; i++)
         {
-            Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+            Instantiate(enemyPrefabSmall, GenerateSpawnPosition(), enemyPrefabSmall.transform.rotation);
+        }
+
+        for (int i = 0; i < mediumEnemies; i++)
+        {
+            Instantiate(enemyPrefabMedium, GenerateSpawnPosition(), enemyPrefabMedium.transform.rotation);
         }
     }
 
@@ -85,6 +92,6 @@ public class SpawnManager : MonoBehaviour
 
     private void MenuUpdate()
     {
-        gameText.text = "Enemies Left: " + enemyCount.ToString() + "Waves Left: " + waveCount.ToString();
+        gameText.text = "Enemies Left: " + enemyCount.ToString() + " Waves Left: " + waveCount.ToString();
     }
 }

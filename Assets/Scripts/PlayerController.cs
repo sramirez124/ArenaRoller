@@ -9,9 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool PushPowerup;
     [SerializeField] private float powerUpStrength = 15.0f;
     [SerializeField] private float speedPowerUp = 2;
-    [SerializeField] private GameObject playerTrial;
+    //[SerializeField] private GameObject playerTrial;
 
     private Rigidbody playerRb;
+    private TrailRenderer playerTrial;
     private float VerticalInput;
     private float HorizontalInput;
 
@@ -19,12 +20,17 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        playerTrial = GetComponent<TrailRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         PlayerMovement();
+        if (transform.position.y < -5)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void PlayerMovement()
@@ -54,7 +60,7 @@ public class PlayerController : MonoBehaviour
             speed = speed * speedPowerUp;
             Destroy(other.gameObject);
             StartCoroutine(Powerup2CountdownRoutine());
-            playerTrial.gameObject.SetActive(true);
+            playerTrial.enabled = true;
         }
 
     }
@@ -68,9 +74,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Powerup2CountdownRoutine()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(4);
         speed = speed / speedPowerUp;
-        playerTrial.gameObject.SetActive(false);
+        playerTrial.enabled = false;
     }
 
     private void OnCollisionEnter(Collision collision)
