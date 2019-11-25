@@ -7,8 +7,6 @@ public class SpawnManager : MonoBehaviour
 {
     // in-game variables
     [SerializeField] private GameObject powerupPrefab1;
-    [SerializeField] private GameObject powerupPrefab2;
-    [SerializeField] private GameObject powerupPrefab3;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject enemyPrefabSmall;
     [SerializeField] private GameObject enemyPrefabMedium;
@@ -31,8 +29,6 @@ public class SpawnManager : MonoBehaviour
     {
         SpawnEnemyWave(smallEnenmyCount, 0);
         Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
-        Instantiate(powerupPrefab2, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
-        //Instantiate(powerupPrefab3, GenerateSpawnPosition(), powerupPrefab2.transform.rotation);
         MenuUpdate();
 
         gameOverMenu.SetActive(false);
@@ -59,7 +55,6 @@ public class SpawnManager : MonoBehaviour
             smallEnenmyCount++;
             mediumEnenmyCount++;
             Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
-            Instantiate(powerupPrefab2, GenerateSpawnPosition(), powerupPrefab2.transform.rotation);
             waveCount--;
         }
         else if (waveCount == 0)

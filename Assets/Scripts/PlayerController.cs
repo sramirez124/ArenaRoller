@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 2f;
     [SerializeField] private GameObject powerupIndicator;
     [SerializeField] private bool PushPowerup;
+    [SerializeField] private bool DestroyPowerUp;
     [SerializeField] private float powerUpStrength = 15.0f;
     [SerializeField] private float speedPowerUp = 2;
     //[SerializeField] private GameObject playerTrial;
 
     private Rigidbody playerRb;
     private TrailRenderer playerTrial;
+
     private float VerticalInput;
     private float HorizontalInput;
 
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerTrial = GetComponent<TrailRenderer>();
+        
     }
 
     // Update is called once per frame
@@ -63,6 +66,12 @@ public class PlayerController : MonoBehaviour
             playerTrial.enabled = true;
         }
 
+        if (other.CompareTag("Powerup3"))
+        {
+            Destroy(other.gameObject);
+            DestroyPowerUp = true;
+        }
+
     }
 
     IEnumerator Powerup1CountdownRoutine()
@@ -87,6 +96,11 @@ public class PlayerController : MonoBehaviour
             Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
 
             enemyRigidbody.AddForce(awayFromPlayer * powerUpStrength, ForceMode.Impulse);
+        }
+
+        if (collision.gameObject.CompareTag("Enemy") && DestroyPowerUp)
+        {
+            Destroy(collision.gameObject);
         }
 
     }
