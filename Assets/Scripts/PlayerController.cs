@@ -70,6 +70,8 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             DestroyPowerUp = true;
+            powerupIndicator.gameObject.SetActive(true);
+            StartCoroutine(Powerup3CountdownRoutine());
         }
 
     }
@@ -86,6 +88,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(4);
         speed = speed / speedPowerUp;
         playerTrial.enabled = false;
+    }
+
+    IEnumerator Powerup3CountdownRoutine()
+    {
+        yield return new WaitForSeconds(3);
+        DestroyPowerUp = false;
+        powerupIndicator.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -31,12 +31,10 @@ public class Enemy : MonoBehaviour
 
     private void Movement()
     {
-        backUp = false;
-        if(backUp == false)
-        {
-            Vector3 lookDirection = (player.transform.position - transform.position).normalized;
-            enemyRb.AddForce(lookDirection * speed);
-        }
+
+        Vector3 lookDirection = (player.transform.position - transform.position).normalized;
+        enemyRb.AddForce(lookDirection * speed);
+        
     }
 
     //Code to make the ball back up and charge
