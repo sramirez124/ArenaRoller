@@ -27,7 +27,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemyWave(smallEnenmyCount, 0);
+        EnemySpawner();
         Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
         MenuUpdate();
 
@@ -44,18 +44,20 @@ public class SpawnManager : MonoBehaviour
             gameOverMenu.SetActive(true);
         }
         MenuUpdate();
+
+        
     }
 
     private void EnemySpawner()
     {
         enemyCount = FindObjectsOfType<Enemy>().Length;
-        if (enemyCount == 0)
+        if (enemyCount == 0 && waveCount >= 1)
         {
             SpawnEnemyWave(smallEnenmyCount, mediumEnenmyCount);
             smallEnenmyCount++;
             mediumEnenmyCount++;
-            Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
             waveCount--;
+            Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
         }
         else if (waveCount == 0)
         {

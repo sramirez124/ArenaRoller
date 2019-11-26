@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Powerup2CountdownRoutine()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(7);
         speed = speed / speedPowerUp;
         playerTrial.enabled = false;
     }
