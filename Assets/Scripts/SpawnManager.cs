@@ -19,7 +19,8 @@ public class SpawnManager : MonoBehaviour
     public Text gameText;
 
     
-    private float spawnRange = 9.0f;
+    [SerializeField] private float spawnRangeX = 9.0f;
+    [SerializeField] private float spawnRangeZ = 9.0f;
     public float enemyCount;
     public int waveCount = 3;
     private bool spawnEnemies = true;
@@ -80,8 +81,8 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 GenerateSpawnPosition()
     {
-        float spawnPosX = Random.Range(-spawnRange, spawnRange);
-        float spawnPosZ = Random.Range(-spawnRange, spawnRange);
+        float spawnPosX = Random.Range(-spawnRangeX, spawnRangeX);
+        float spawnPosZ = Random.Range(-spawnRangeZ, spawnRangeZ);
 
         Vector3 randomPos = new Vector3(spawnPosX, 0, spawnPosZ);
         return randomPos;

@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool DestroyPowerUp;
     [SerializeField] private float powerUpStrength = 15.0f;
     [SerializeField] private float speedPowerUp = 2;
-    //[SerializeField] private GameObject playerTrial;
 
     private Rigidbody playerRb;
     private TrailRenderer playerTrial;

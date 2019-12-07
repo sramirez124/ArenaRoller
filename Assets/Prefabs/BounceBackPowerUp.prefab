@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5249640306841223429}
   - component: {fileID: 6295754949814619565}
   m_Layer: 0
-  m_Name: Powerup1
+  m_Name: BounceBackPowerUp
   m_TagString: Powerup1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
