@@ -7,6 +7,8 @@ public class SpawnManager : MonoBehaviour
 {
     // in-game variables
     [SerializeField] private GameObject powerupPrefab1;
+    [SerializeField] private GameObject powerupPrefab2;
+    [SerializeField] private GameObject powerupPrefab3;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject enemyPrefabSmall;
     [SerializeField] private GameObject enemyPrefabMedium;
@@ -29,7 +31,6 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         EnemySpawner();
-        Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
         MenuUpdate();
 
         gameOverMenu.SetActive(false);
