@@ -12,8 +12,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject enemyPrefabSmall;
     [SerializeField] private GameObject enemyPrefabMedium;
+    [SerializeField] private GameObject enemyPrefabLarge;
     [SerializeField] private int smallEnenmyCount;
     [SerializeField] private int mediumEnenmyCount;
+    [SerializeField] private int largeEnenmyCount;
 
     // menu variables
     [SerializeField] private GameObject gameOverMenu;
@@ -55,19 +57,21 @@ public class SpawnManager : MonoBehaviour
         enemyCount = FindObjectsOfType<Enemy>().Length;
         if (enemyCount == 0 && waveCount >= 1)
         {
-            SpawnEnemyWave(smallEnenmyCount, mediumEnenmyCount);
+            SpawnEnemyWave(smallEnenmyCount, mediumEnenmyCount, largeEnenmyCount);
             smallEnenmyCount++;
             mediumEnenmyCount++;
             waveCount--;
             Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
+            Instantiate(powerupPrefab2, GenerateSpawnPosition(), powerupPrefab2.transform.rotation);
+            //Instantiate(powerupPrefab3, GenerateSpawnPosition(), powerupPrefab3.transform.rotation);
         }
-        else if (waveCount == 0)
+        else if (waveCount == 0 && enemyCount == 0)
         {
             nextLevelMenu.SetActive(true);
         }
     }
 
-    private void SpawnEnemyWave(int smallEnemies, int mediumEnemies)
+    private void SpawnEnemyWave(int smallEnemies, int mediumEnemies, int largeEnemies)
     {
         for (int i = 0; i < smallEnemies; i++)
         {
@@ -77,6 +81,11 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < mediumEnemies; i++)
         {
             Instantiate(enemyPrefabMedium, GenerateSpawnPosition(), enemyPrefabMedium.transform.rotation);
+        }
+
+        for (int i = 0; i < largeEnemies; i++)
+        {
+            Instantiate(enemyPrefabLarge, GenerateSpawnPosition(), enemyPrefabMedium.transform.rotation);
         }
     }
 

@@ -1939,22 +1939,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupPrefab1: {fileID: 5228104825470146961, guid: 7063a148834bfc345b866b991189a396,
     type: 3}
-  powerupPrefab2: {fileID: 0}
+  powerupPrefab2: {fileID: 2259907759377877400, guid: 9f649300001bb4c459028ca67dc22cfc,
+    type: 3}
   powerupPrefab3: {fileID: 0}
   Player: {fileID: 2044256048}
   enemyPrefabSmall: {fileID: 7068127136662254017, guid: 658fe72da4def7f41aeeef6530177054,
     type: 3}
   enemyPrefabMedium: {fileID: 715942278364239384, guid: 0db188fc466f78741a8c29cb3391e0c2,
     type: 3}
+  enemyPrefabLarge: {fileID: 2680382855837487645, guid: 38db897152b691d40824db0aa4d2eb3d,
+    type: 3}
   smallEnenmyCount: 0
   mediumEnenmyCount: 0
+  largeEnenmyCount: 4
   gameOverMenu: {fileID: 648060682}
   nextLevelMenu: {fileID: 1893327013}
   gameText: {fileID: 2044749832}
   spawnRangeX: 31
   spawnRangeZ: 23
   enemyCount: 0
-  waveCount: 100
+  waveCount: 6
 --- !u!4 &1033210511
 Transform:
   m_ObjectHideFlags: 0
@@ -4040,7 +4044,7 @@ PrefabInstance:
     - target: {fileID: 2259907759377524572, guid: 9f649300001bb4c459028ca67dc22cfc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.994543
+      value: 16.43
       objectReference: {fileID: 0}
     - target: {fileID: 2259907759377524572, guid: 9f649300001bb4c459028ca67dc22cfc,
         type: 3}
@@ -4200,7 +4204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044256048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.37997, y: 4, z: -320.9}
+  m_LocalPosition: {x: 16.37, y: 4, z: -320.9}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4220,7 +4224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   powerupIndicator: {fileID: 1592709421}
-  PushPowerup: 1
+  PushPowerup: 0
   DestroyPowerUp: 0
   powerUpStrength: 15
   speedPowerUp: 2
