@@ -15,12 +15,4 @@ public class ArenaTrigger : MonoBehaviour
             gameCanvas.gameObject.SetActive(true);
         }
     }
-
-    /*IEnumerator ArenaTriggerRoutine()
-    {
-        yield return new WaitForSeconds(4);
-        SpawnManager.gameObject.SetActive(true);
-        gameCanvas.gameObject.SetActive(true);
-        
-    }*/
 }
