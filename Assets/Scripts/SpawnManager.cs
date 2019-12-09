@@ -63,7 +63,7 @@ public class SpawnManager : MonoBehaviour
             waveCount--;
             Instantiate(powerupPrefab1, GenerateSpawnPosition(), powerupPrefab1.transform.rotation);
             Instantiate(powerupPrefab2, GenerateSpawnPosition(), powerupPrefab2.transform.rotation);
-            //Instantiate(powerupPrefab3, GenerateSpawnPosition(), powerupPrefab3.transform.rotation);
+            Instantiate(powerupPrefab3, GenerateSpawnPosition(), powerupPrefab3.transform.rotation);
         }
         else if (waveCount == 0 && enemyCount == 0)
         {
