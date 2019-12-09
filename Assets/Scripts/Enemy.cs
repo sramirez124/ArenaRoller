@@ -36,17 +36,4 @@ public class Enemy : MonoBehaviour
         enemyRb.AddForce(lookDirection * speed);
         
     }
-
-    //Code to make the ball back up and charge
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            backUp = true;
-            Debug.Log("Backing up");
-            Vector3 BackUp = (player.transform.position + transform.position).normalized;
-            enemyRb.AddForce(BackUp * speed);
-            Movement();
-        }
-    }*/
 }
