@@ -855,10 +855,10 @@ MonoBehaviour:
     type: 3}
   enemyPrefabMedium: {fileID: 715942278364239384, guid: 0db188fc466f78741a8c29cb3391e0c2,
     type: 3}
-  enemyPrefabHuge: {fileID: 0}
+  enemyPrefabLarge: {fileID: 0}
   smallEnenmyCount: 3
   mediumEnenmyCount: 0
-  hugeEnenmyCount: 0
+  largeEnenmyCount: 0
   gameOverMenu: {fileID: 648060682}
   nextLevelMenu: {fileID: 1893327013}
   gameText: {fileID: 2044749832}
@@ -1702,7 +1702,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!135 &2044256050
 SphereCollider:
